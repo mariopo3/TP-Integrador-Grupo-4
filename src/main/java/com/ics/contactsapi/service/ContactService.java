@@ -1,6 +1,6 @@
-package com.ics.demo.service;
+package com.ics.contactsapi.service;
 
-import com.ics.demo.model.Contact;
+import com.ics.contactsapi.model.Contact;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -48,4 +48,3 @@ public class ContactService {
         return store.remove(id) != null;
     }
 }
-

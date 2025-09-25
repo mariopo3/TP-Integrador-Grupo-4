@@ -1,10 +1,10 @@
-package com.ics.demo;
+package com.ics.contactsapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class ContactsApiApplicationTests {
 
 	@Test
 	void contextLoads() {

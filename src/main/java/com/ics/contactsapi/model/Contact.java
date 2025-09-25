@@ -1,4 +1,4 @@
-package com.ics.demo.model;
+package com.ics.contactsapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

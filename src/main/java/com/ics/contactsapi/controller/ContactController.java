@@ -1,7 +1,7 @@
-package com.ics.demo.controller;
+package com.ics.contactsapi.controller;
 
-import com.ics.demo.model.Contact;
-import com.ics.demo.service.ContactService;
+import com.ics.contactsapi.model.Contact;
+import com.ics.contactsapi.service.ContactService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
