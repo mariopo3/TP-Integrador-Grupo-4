@@ -1,5 +1,14 @@
 package com.ics.contactsapi.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Contact {
-// Hacer uso de Lombok, agregar atributos para el CRUD general y datos necesarios
+    private Long id;
+    private String name;
+    private String email;
 }
