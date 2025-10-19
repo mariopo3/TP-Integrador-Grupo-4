@@ -22,6 +22,7 @@ public class ContactService {
         return values.stream()
                 .filter(c -> (c.getName() != null && c.getName().toLowerCase(Locale.ROOT).contains(needle))
                         || (c.getEmail() != null && c.getEmail().toLowerCase(Locale.ROOT).contains(needle)))
+                .filter(Contact::isActive)
                 .collect(Collectors.toList());
     }
 
