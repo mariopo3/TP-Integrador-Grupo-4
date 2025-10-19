@@ -31,7 +31,7 @@ public class ContactService {
 
     public Contact create(Contact in) {
         long id = seq.incrementAndGet();
-        Contact c = new Contact(id, in.getName(), in.getEmail());
+        Contact c = new Contact(id, in.getName(), in.getEmail(), in.isActive());
         store.put(id, c);
         return c;
     }
@@ -45,6 +45,9 @@ public class ContactService {
     }
 
     public boolean delete(Long id) {
-        return store.remove(id) != null;
+        Contact existing = store.get(id);
+        if (existing == null) return false;
+        existing.setActive(false);
+        return true;
     }
 }
