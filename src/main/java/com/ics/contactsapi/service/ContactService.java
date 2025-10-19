@@ -22,6 +22,7 @@ public class ContactService {
         return values.stream()
                 .filter(c -> (c.getName() != null && c.getName().toLowerCase(Locale.ROOT).contains(needle))
                         || (c.getEmail() != null && c.getEmail().toLowerCase(Locale.ROOT).contains(needle)))
+                .filter(Contact::isActive)
                 .collect(Collectors.toList());
     }
 
@@ -31,7 +32,7 @@ public class ContactService {
 
     public Contact create(Contact in) {
         long id = seq.incrementAndGet();
-        Contact c = new Contact(id, in.getName(), in.getEmail());
+        Contact c = new Contact(id, in.getName(), in.getEmail(), in.isActive());
         store.put(id, c);
         return c;
     }
@@ -45,6 +46,9 @@ public class ContactService {
     }
 
     public boolean delete(Long id) {
-        return store.remove(id) != null;
+        Contact existing = store.get(id);
+        if (existing == null) return false;
+        existing.setActive(false);
+        return true;
     }
 }
