@@ -13,17 +13,29 @@ public class ContactService {
     private final Map<Long, Contact> store = new ConcurrentHashMap<>();
     private final AtomicLong seq = new AtomicLong(0);
 
-    public List<Contact> list(String q) {
+    public List<Contact> list(String q, boolean includeInactive) {
         Collection<Contact> values = store.values();
         if (q == null || q.isBlank()) {
-            return new ArrayList<>(values);
+            if (includeInactive){
+                return new ArrayList<>(values);
+            }
+             return values.stream()
+                    .filter(Contact::isActive)
+                    .collect(Collectors.toList());
         }
         String needle = q.toLowerCase(Locale.ROOT);
-        return values.stream()
+        List<Contact> stream = values.stream()
                 .filter(c -> (c.getName() != null && c.getName().toLowerCase(Locale.ROOT).contains(needle))
                         || (c.getEmail() != null && c.getEmail().toLowerCase(Locale.ROOT).contains(needle)))
-                .filter(Contact::isActive)
                 .collect(Collectors.toList());
+        
+        if (!includeInactive){
+            stream = stream.stream()
+                    .filter(Contact::isActive)
+                    .collect(Collectors.toList());
+        }
+
+        return stream;
     }
 
     public Optional<Contact> get(Long id) {
